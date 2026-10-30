@@ -1,3 +1,5 @@
+![Banner](banner.png)
+
 # dm-data-semantic-varier
 Subtly alters the meaning of data by replacing words or phrases with synonyms or paraphrases. Preserves the general sense of the information while hindering precise identification. - Focused on Tools designed to generate or mask sensitive data with realistic-looking but meaningless values
 
