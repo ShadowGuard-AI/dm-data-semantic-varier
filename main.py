@@ -47,7 +47,9 @@ def replace_word_with_synonym(word, fake):
         str: A synonym for the word, or the original word if no synonym is found or replacement fails.
     """
     try:
-        # Basic synonym replacement using Faker's random elements.  This is illustrative only.
+        # The replacement is a random Faker word, not a looked-up synonym:
+        # meaning is not preserved, only the shape of the sentence is. That
+        # is enough to break exact-text matching, which is the actual use.
         synonyms = [fake.word(), fake.word(), fake.word()]  # Get a few random words
         if synonyms:
             return random.choice(synonyms)
@@ -80,6 +82,20 @@ def generate_semantic_variation(input_string, fake, word_replacement_probability
     return " ".join(varied_words)
 
 
+def validate_variation_args(num_variations, probability):
+    """Reject counts and probabilities that would otherwise fail silently.
+
+    A probability above 1 or below 0 still "works" inside the comparison in
+    generate_semantic_variation (it just replaces everything or nothing),
+    and a count of 0 prints nothing at all. Both look like success to a
+    caller, so they are errors here instead.
+    """
+    if num_variations < 1:
+        raise ValueError(f"Number of variations must be at least 1, got {num_variations}.")
+    if not 0.0 <= probability <= 1.0:
+        raise ValueError(f"Word replacement probability must be between 0 and 1, got {probability}.")
+
+
 def validate_locale(locale):
     """
     Validates the given locale against the allowed locales.
@@ -97,6 +113,7 @@ def main():
 
     try:
         validate_locale(args.locale)
+        validate_variation_args(args.num_variations, args.word_replacement_probability)
         fake = Faker(args.locale)
 
         if args.seed is not None:
