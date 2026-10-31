@@ -16,7 +16,7 @@ def setup_argparse():
     Sets up the argument parser for the command line interface.
     """
     parser = argparse.ArgumentParser(
-        description="Subtly alters the meaning of data by replacing words or phrases with synonyms or paraphrases.  Preserves the general sense of the information while hindering precise identification."
+        description="Varies text by replacing each selected word with a random unrelated word. Meaning is not preserved. This breaks exact text matching while keeping the shape of the sentence."
     )
 
     parser.add_argument("input_string",
@@ -28,33 +28,29 @@ def setup_argparse():
     parser.add_argument("-s", "--seed", type=int,
                         help="Optional seed for the random number generator, to ensure reproducibility.")
     parser.add_argument("--word_replacement_probability", type=float, default=0.3,
-                        help="The probability of replacing each word with a synonym (default: 0.3).")
+                        help="The probability of replacing each word with a random unrelated word (default: 0.3). A probability of 0 is rejected.")
 
     return parser
 
 
 def replace_word_with_synonym(word, fake):
     """
-    Replaces a word with a synonym using Faker. This is a very basic
-    implementation for demonstration purposes.  A more robust implementation
-    would use a proper thesaurus or word embedding model.
+    Replaces a word with a random unrelated word from Faker. The word is
+    not a synonym and meaning is not preserved.
 
     Args:
         word (str): The word to replace.
         fake (Faker): The Faker instance.
 
     Returns:
-        str: A synonym for the word, or the original word if no synonym is found or replacement fails.
+        str: A random unrelated word, or the original word if replacement fails.
     """
     try:
-        # The replacement is a random Faker word, not a looked-up synonym:
-        # meaning is not preserved, only the shape of the sentence is. That
-        # is enough to break exact-text matching, which is the actual use.
-        synonyms = [fake.word(), fake.word(), fake.word()]  # Get a few random words
-        if synonyms:
-            return random.choice(synonyms)
+        candidates = [fake.word(), fake.word(), fake.word()]
+        if candidates:
+            return random.choice(candidates)
         else:
-            return word  # Return original word if no synonyms are available
+            return word
     except Exception as e:
         logging.error(f"Error replacing word '{word}': {e}")
         return word
@@ -62,24 +58,21 @@ def replace_word_with_synonym(word, fake):
 
 def generate_semantic_variation(input_string, fake, word_replacement_probability):
     """
-    Generates a semantically varied version of the input string.
-
-    Args:
-        input_string (str): The string to vary.
-        fake (Faker): The Faker instance.
-        word_replacement_probability (float): Probability of replacing each word
+    Generates a varied version of the input string.
 
     Returns:
-        str: The semantically varied string.
+        tuple: The varied string and the number of words replaced.
     """
     words = input_string.split()
     varied_words = []
+    replaced = 0
     for word in words:
         if random.random() < word_replacement_probability:
             varied_words.append(replace_word_with_synonym(word, fake))
+            replaced += 1
         else:
             varied_words.append(word)
-    return " ".join(varied_words)
+    return " ".join(varied_words), replaced
 
 
 def validate_variation_args(num_variations, probability):
@@ -92,6 +85,8 @@ def validate_variation_args(num_variations, probability):
     """
     if num_variations < 1:
         raise ValueError(f"Number of variations must be at least 1, got {num_variations}.")
+    if probability == 0.0:
+        raise ValueError("Word replacement probability must not be 0.")
     if not 0.0 <= probability <= 1.0:
         raise ValueError(f"Word replacement probability must be between 0 and 1, got {probability}.")
 
@@ -120,8 +115,16 @@ def main():
             random.seed(args.seed)
             fake.seed_instance(args.seed)  # Also seed Faker
 
+        variations = []
+        total_replaced = 0
         for _ in range(args.num_variations):
-            variation = generate_semantic_variation(args.input_string, fake, args.word_replacement_probability)
+            variation, replaced = generate_semantic_variation(args.input_string, fake, args.word_replacement_probability)
+            variations.append(variation)
+            total_replaced += replaced
+        if total_replaced == 0:
+            print("No words were replaced.")
+            sys.exit(1)
+        for variation in variations:
             print(variation)
 
     except ValueError as e:
