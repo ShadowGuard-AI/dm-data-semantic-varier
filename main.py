@@ -46,6 +46,12 @@ def replace_word_with_synonym(word, fake):
         str: A random unrelated word, or the original word if replacement fails.
     """
     try:
+        # I draw three words and pick one, which burns three draws from the
+        # Faker stream for every replacement. The list is never empty, so
+        # the else below cannot run; the real fallback is the except, which
+        # hands the original word back. Note what a replacement loses: the
+        # word arrives with any punctuation still glued to it, and the bare
+        # fake word that replaces it carries none of that punctuation away.
         candidates = [fake.word(), fake.word(), fake.word()]
         if candidates:
             return random.choice(candidates)
@@ -63,6 +69,10 @@ def generate_semantic_variation(input_string, fake, word_replacement_probability
     Returns:
         tuple: The varied string and the number of words replaced.
     """
+    # split() with no argument is a bigger change than it looks: runs of
+    # spaces, tabs, and newlines all collapse, and the join below rebuilds
+    # the text with single spaces. The word count survives; the original
+    # spacing does not, whatever the sentence looked like going in.
     words = input_string.split()
     varied_words = []
     replaced = 0
@@ -116,6 +126,10 @@ def main():
             fake.seed_instance(args.seed)  # Also seed Faker
 
         variations = []
+        # The zero check below reads this total across every variation, not
+        # per variation. One replaced word anywhere keeps the run alive, and
+        # a variation that replaced nothing still prints, as long as a
+        # sibling variation replaced something.
         total_replaced = 0
         for _ in range(args.num_variations):
             variation, replaced = generate_semantic_variation(args.input_string, fake, args.word_replacement_probability)
