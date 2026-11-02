@@ -1,166 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dm Data Semantic Varier: what it is, how it runs, where it stops</title>
-<meta name="description" content="Dm Data Semantic Varier is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.">
-<style>
-:root {
-  --bg: #0a120e; --panel: #101c16; --ink: #e6f0e2;
-  --mut: #15251d;
-  --acc: #a8e05c; --acc2: #f0be54;
-  --line: #101c16;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: Verdana, Geneva, sans-serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'Lucida Console', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
-</style>
-</head>
-<body class="layout-grid">
-<!-- This page exists for dm-data-semantic-varier alone: the layout (console-grid),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
-<header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Dm Data Semantic Varier logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Dm Data Semantic Varier</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/dm-data-semantic-varier">github.com/ShadowGuard-AI/dm-data-semantic-varier</a></p>
-</header>
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>dm-data-semantic-varier: The Card Catalogue's Last Drawer</title>
+<style>@font-face{font-family:Disp;src:url("fonts/CantoraOne.ttf")}@font-face{font-family:Text;src:url("fonts/AlegreyaSans.ttf")}
+body{background:#ffffff;font-family:Text,sans-serif;color:#454139;margin:0}main{max-width:920px;margin:0 auto;padding:28px}
+h1,h2,h3{font-family:Disp,sans-serif;color:#232020}section{background:#eadfc6;padding:18px 22px;margin:16px 0;border:2px solid #926e40;border-left:6px solid #926e40;position:relative}
+section.seedline{border-left-color:#2a5aa0}img{max-width:100%}button{background:#f6f1e5;color:#232020;border:2px solid #141210;padding:12px 22px;font-family:Disp,sans-serif;clip-path:polygon(0 22%, 12% 0, 88% 0, 100% 22%, 100% 100%, 0 100%)}
+button:hover{color:#000}button:active{transform:translateY(2px)}button:focus{outline:3px double #2a5aa0;outline-offset:3px}
+a{color:#232020}a::before{content:"▭  ";color:#232020}a:hover::before{color:#2a5aa0}
+.label{display:inline-block;border:1px solid #232020;padding:2px 8px;font-size:13px}pre{white-space:pre-wrap;background:#f6f1e5;padding:14px}code{font-family:Text,sans-serif}
+.mark{color:#2a5aa0;font-family:Disp,sans-serif}.stampoval{position:absolute;top:10px;right:14px;width:64px;height:34px;border:3px solid #b9b4a4;border-radius:50%;display:inline-block}</style></head><body><main>
+<img src="intro-banner.png" alt="Introduction banner: a solitary upright slip where the drawer front falls away, ruled side empty, tab in the daylight, labels and ribbons behind, no writing">
+<h1>dm-data-semantic-varier: The Card Catalogue's Last Drawer</h1>
+<p>Wherever this site names itself, it uses the joined form dm-data-semantic-varier: The Card Catalogue's Last Drawer, repository first, theme second. Read the page the way fingers read a drawer, slip after slip, every slip hoisted, scanned, and slid home again.</p>
+<img src="logo.png" alt="Logo: one catalogue slip seen from above, three wordless ruled lines, a carbon blue tab past the rim, a crease at the left corner, an oak band along the foot, the name underneath"><img src="banner.png" alt="Wordmark banner: the oak catalogue with its last drawer hauled fully open, slips ranked inside, a stepladder at one flank, a desk with a date stamp, cold sealing wax and a dark monitor behind, the name on the paper strip inside the brass holder of the open drawer">
+<img src="scene.svg" alt="Animated scene in three bands">
+<p><span class="mark">▪</span> Carbon blue bookmark marker</p>
+<div><button type="button">Vary the Words</button></div>
+<p><span class="label">Replacement Probability</span> <span class="label">Seed, Optional</span></p>
+<h3>Nothing Replaced, Nothing Printed</h3>
+<section><h2>Slip one: the job</h2><p>Text gets varied here: chosen words are swapped for random unrelated substitutes. Meaning does not survive the swap, and ruining it is precisely the aim, because literal matching collapses while a sentence keeps its outline. One last line preserves the family sentence the README carries concerning tools which generate or mask sensitive data using realistic looking yet meaningless values. Nowhere across this site does any sentence lifted out of anybody's data appear, nor any source word, nor any substitute word.</p></section>
+<p><span class="mark">▪</span> Carbon blue bookmark marker</p>
+<section><h2>Slip two: retrieval, with one slip of the pen mended</h2><p><code>git clone https://github.com/ShadowGuard-AI/dm-data-semantic-varier</code></p><p>The line above wears a correction label and never masquerades as the wording originally published. The address printed in the README credits a predecessor organisation, so anyone obeying it character by character knocks at the wrong house. The mended line gives the organisation name with the hyphen sitting inside it, as it stands today.</p></section>
+<p><span class="mark">▪</span> Carbon blue bookmark marker</p>
+<section><h2>Slip three: the invocation, outline only</h2><p><code>./dm-data-semantic-varier [params]</code></p><p>Program leading, bracketed parameters trailing: that outline is all the source offers. The source gives zero worked call, zero input file name, and zero sentence awaiting variation, so the ruled lines on this slip stay deliberately vacant instead of being padded with a fabricated specimen.</p></section>
+<p><span class="mark">▪</span> Carbon blue bookmark marker</p>
+<section><h2>Slip four: the switches, in README sequence</h2><p>Help opens the run: the flag -h displays the help message before exiting. Next, -n, about which the source line admits no description was provided. Next, -l, drawing the identical admission. Last, --word_replacement_probability, the probability governing whether each word gets replaced by a random unrelated word, carrying the printed verdict whereby a probability of 0 is rejected. Both absent descriptions are restated here as absences. Guessing which quantity -n tallies or which ceiling -l imposes would betray the record, since the record itself refuses to disclose either.</p><p class="seedline" style="border-left:6px solid #2a5aa0;padding-left:12px">The seed slip: -s, an optional seed aimed at the random number generator, to ensure reproducibility. Silence surrounds its default inside the source, hence silence here likewise.</p></section>
+<p><span class="mark">▪</span> Carbon blue bookmark marker</p>
+<section><span class="stampoval"></span><h2>Slip five: the refusal, enlarged</h2><h3>Nothing Replaced, Nothing Printed</h3><p>Whenever a run swaps zero words, the run emits a plain no words were replaced line and exits 1, declining to emit the incoming text unaltered. The reason is spelled out at full size: unaltered output masquerades as varied output, and confusing those two states is exactly what this program will not permit. This slip wears the uninked date stamp oval in its top corner, the mark of a refused run.</p></section>
+<p><span class="mark">▪</span> Carbon blue bookmark marker</p>
+<section><h2>Slip six: two licence facts, kept apart</h2><p>Ahead stands the repository LICENSE on its own: MIT terms, its holder sketched by outline only near the top of the record, a pen name counting two words first, a given name shrunk to a lone initial inside brackets second, a handle trailing in parentheses last. The holder line itself is not reproduced here.</p><p>Behind it, flagged as a site correction: the README closing line respelled so the organisation reads in its present hyphenated spelling reads: Copyright (c) ShadowGuard-AI. Site correction. The published line used the predecessor name, and it stands untouched in the preserved record below.</p></section>
+<p><span class="mark">▪</span> Carbon blue bookmark marker</p>
+<section><h2>Slip seven: the enquiry desk</h2><p>Queries arriving at this desk, a habit belonging to this catalogue alone, get cross-referenced beneath four tabs. Chance gathers the probability slip, holding its lone hard verdict, 0 rejected, with no neighbouring figure fabricated. Repeatability gathers the seed slip, optional, its default unrecorded inside the source and equally unrecorded here. Silence gathers both undescribed flags, presented as ruled slips nobody wrote upon, the truthful reply concerning -n and -l being that this documentation stays mute. Failure gathers the refusal slip, the run altering nothing while announcing the fact via exit 1. Students, librarians, dataset cleaners, and cautious researchers alike depart clutching whichever slip they requested, opened completely, zero extras smuggled aboard, zero pertinent facts suppressed, the drawer banging shut behind them.</p></section>
+<section><h2>The preserved README record</h2><pre>![Banner](banner.png)
 
-<main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/dm-data-semantic-varier">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Dm Data Semantic Varier is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Dm Data Semantic Varier: 5 files, 157 counted
-          lines across Python 136, Markdown 20, Text 1. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/dm-data-semantic-varier.git<br>$ cd dm-data-semantic-varier</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 12 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>
+# dm-data-semantic-varier
+Varies text by replacing each selected word with a random unrelated word. Meaning is not preserved. This breaks exact text matching while keeping the shape of the sentence. - Focused on Tools designed to generate or mask sensitive data with realistic-looking but meaningless values
 
-def setup_argparse():
-    &quot;&quot;&quot;
-    Sets up the argument parser for the command line interface.
-    &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(
-        description=&quot;Subtly alters the meaning of data by replacing words or phrases with synonyms or paraphrases.  Preserves the general sense of the information while hindering precise identification.&quot;
-    )
+## Install
+`git clone https://github.com/ShadowStrikeHQ/dm-data-semantic-varier`
 
-    parser.add_argument(&quot;input_string&quot;,
-                        help=&quot;The input string to be semantically varied.&quot;)
-    parser.add_argument(&quot;-n&quot;, &quot;--num_variations&quot;, type=int, default=1,
-                        help=&quot;The number of variations to generate (default: 1).&quot;)
-    parser.add_argument(&quot;-l&quot;, &quot;--locale&quot;, type=str, default=&#x27;en_US&#x27;,
-                        help=&quot;The Faker locale to use (e.g., en_US, fr_FR).  Must be in the whitelist.&quot;)
-    parser.add_argument(&quot;-s&quot;, &quot;--seed&quot;, type=int,
-                        help=&quot;Optional seed for the random number generator, to ensure reproducibility.&quot;)
-    parser.add_argument(&quot;--word_replacement_probability&quot;, type=float, default=0.3,
-                        help=&quot;The probability of replacing each word with a synonym (default: 0.3).&quot;)
+## Usage
+`./dm-data-semantic-varier [params]`
 
-    return parser</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>136</td></tr>
-        <tr><td><code>README.md</code></td><td>20</td></tr>
-        <tr><td><code>requirements.txt</code></td><td>1</td></tr>
-        <tr><td><code>banner.png</code></td><td>0</td></tr>
-        <tr><td><code>logo.png</code></td><td>0</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, replace_word_with_synonym, generate_semantic_variation, validate_variation_args, validate_locale, main</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/dm-data-semantic-varier/tree/main/dm-data-semantic-varier-Visuals">dm-data-semantic-varier-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Dm Data Semantic Varier">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Dm Data Semantic Varier">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Dm Data Semantic Varier">
-        </div>
-      </section>
-    </div>
-  </section>
-</main>
-<footer>
-  <p>Dm Data Semantic Varier is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
-</body>
-</html>
+## Parameters
+- `-h`: Show help message and exit
+- `-n`: No description provided
+- `-l`: No description provided
+- `-s`: Optional seed for the random number generator, to ensure reproducibility.
+- `--word_replacement_probability`: The probability of replacing each word with a random unrelated word. A probability of 0 is rejected.
+
+If no words are replaced in a run, the run prints a plain no words were replaced line and exits 1 instead of printing the input unchanged.
+
+## License
+Copyright (c) ShadowStrikeHQ</pre></section>
+</main></body></html>
